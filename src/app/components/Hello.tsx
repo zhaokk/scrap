@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ReactTable from 'react-table';
-import * as colorsJson from './data/allProduct.json';
+import * as colorsJson from './data/withSoldHistory.json';
 let moment = require('moment');
 
 export class ScrapDataView extends React.Component<any, any> {
@@ -143,6 +143,11 @@ export class ScrapDataView extends React.Component<any, any> {
                       {row.value}
                     </div>
                   )
+                },
+                {
+                  Header: 'income',
+                  accessor: 'income',
+                  width: 200,
                 }
               ]
             }
@@ -168,6 +173,7 @@ export class product {
   watch: number = 0;
   sellHistory: Array<NumberSoldDate> = [];
   averageSellPerDay: number = 0;
+  income: number = 0;
 
   constructor(product?: any) {
     if (!product) {
@@ -194,9 +200,13 @@ export class product {
         soldSum +=element.sold
       });
       this.averageSellPerDay = Math.ceil(soldSum/duration);
+      this.calculateTotalSale();
     }catch(e){
       console.log(e.message);
     }
+  }
+  calculateTotalSale(){
+    this.income = this.averageSellPerDay * this.averageSellPerDay;
   }
 }
 export class NumberSoldDate {
