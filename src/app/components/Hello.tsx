@@ -206,7 +206,7 @@ export class product {
     }
   }
   calculateTotalSale(){
-    this.income = this.averageSellPerDay * this.averageSellPerDay;
+    this.income = this.averageSellPerDay * this.price;
   }
 }
 export class NumberSoldDate {
